@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+
 const Button = (props) => (
   <button onClick={props.onClick}>
     {props.text}
@@ -13,6 +14,14 @@ const ReviewStatisticText = (props) => (
 )
 
 const Statistics = (props) => {
+  if (props.total === 0) {
+    return (
+      <div>
+        <h1>Statistics</h1>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
   return (
     <div>
       <h1>Statistics</h1>
@@ -21,7 +30,9 @@ const Statistics = (props) => {
       <ReviewStatisticText type="bad" amount={props.bad} />
       <ReviewStatisticText type="all" amount={props.total} />
       <ReviewStatisticText type="average" amount={props.average} />
-      <ReviewStatisticText type="positive"amount={`${props.positivePercentage} %`}
+      <ReviewStatisticText
+        type="positive"
+        amount={`${props.positivePercentage} %`}
       />
     </div>
   )
@@ -37,7 +48,6 @@ const App = () => {
   const total = good + neutral + bad
   const average = total === 0 ? 0 : (good - bad) / total
   const positivePercentage = total === 0 ? 0 : (good / total) * 100
-
 
   return (
     <div>
