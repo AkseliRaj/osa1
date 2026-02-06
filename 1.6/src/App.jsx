@@ -12,6 +12,22 @@ const ReviewStatisticText = (props) => (
   </p>
 )
 
+const Statistics = (props) => {
+  return (
+    <div>
+      <h1>Statistics</h1>
+      <ReviewStatisticText type="good" amount={props.good} />
+      <ReviewStatisticText type="neutral" amount={props.neutral} />
+      <ReviewStatisticText type="bad" amount={props.bad} />
+      <ReviewStatisticText type="all" amount={props.total} />
+      <ReviewStatisticText type="average" amount={props.average} />
+      <ReviewStatisticText type="positive"amount={`${props.positivePercentage} %`}
+      />
+    </div>
+  )
+}
+
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
@@ -31,15 +47,14 @@ const App = () => {
         <Button onClick={() => setNeutral(neutral + 1)} text="neutral" />
         <Button onClick={() => setBad(bad + 1)} text="bad" />
       </div>
-      <div>
-        <h1>Statistics</h1>
-        <ReviewStatisticText type="good" amount={good}/>
-        <ReviewStatisticText type="neutral" amount={neutral}/>
-        <ReviewStatisticText type="bad" amount={bad}/>
-        <ReviewStatisticText type="all" amount={total}/>
-        <ReviewStatisticText type="average" amount={average}/>
-        <ReviewStatisticText type="positive" amount={`${positivePercentage} %`}/>
-      </div>
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={total}
+        average={average}
+        positivePercentage={positivePercentage}
+      />
     </div>
   )
 }
